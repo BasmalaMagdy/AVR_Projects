@@ -1,0 +1,224 @@
+/********************************************************************************
+ * File Name: password.c
+ *
+ * Author: Basmala Magdy
+ *
+ * Created on: Mar 30, 2021
+ *
+ * Description: function used in main
+ *******************************************************************************/
+/*******************************************************************************
+ *                                   INCLUDES                                  *
+ *******************************************************************************/
+#define F_CPU 8000000UL
+#include "password.h"
+#include "external_eeprom.h"
+#include "timer.h"
+/*******************************************************************************
+ *                                  Definitions                                *
+ *******************************************************************************/
+#define M1_READY 0x01 /*MC2 send to MC1 when it is ready*/
+#define M2_READY 0x02 /*MC2 send to MC1 when it is ready*/
+#define Begin 0x03 /*MCU1 make MCU2 to begin saving the password*/
+#define End 0x04 /*MC2 send to MC1 to inform that saving password has been finished*/
+#define compPass 0x05 /*MC2 send to MC1 to start comparing passwords*/
+#define wrong 0x06 /*MC2 send to MC1 that entered password was wrong*/
+#define correct 0x07 /*MC2 send to MC1 that entered password was correct*/
+#define M2_comREADY 0x08 /*MC2 send to MC1 when it is ready in compare*/
+#define Open 0x09 /*MC2 send to MC1 when it is ready to open door*/
+#define INIT_FLAG 0x0A /*Flag is saved if the one run code is done*/
+/*******************************************************************************
+ *                           Global Variables                                  *
+ *******************************************************************************/
+volatile uint8 g_flag = 0;
+volatile uint8 g_errCount =  0;        /*variable used to count how many user enter password wrong*/
+volatile uint8 g_error_flag = 0;       /*variable used to know if user enter password wrong 3 times*/
+volatile uint8 g_timeCount = 0;        /*variable used to count time*/
+volatile uint8 g_sec_Count = 0;        /*variable used to count number of seconds*/
+
+/* FUNCTION to get password from user and check 2 password and save it*/
+void recievePassword(void)
+{
+	/*******************************************************************************
+	 *                          LOCAL VARIABLE                                  *
+	 *******************************************************************************/
+	uint8 a_Pass[6];                    /*variable used to save password*/
+	/*uint8 a_rPass[6];*/
+	uint8 a_count;                      /*variable used to count received password*/
+
+	/*MCU2 wait until MCU1 send to start*/
+	while(UART_recieveByte()!= Begin);
+	/*LCD_clearScreen();
+	LCD_displayString("ccccc");*/
+	/*loop to save password*/
+	for(a_count = 0; a_count < 5; a_count++)
+	{
+		/*MCU2 send to MCU1 that it be ready*/
+		UART_sendByte(M2_READY);
+
+		a_Pass[a_count] = UART_recieveByte();
+		LCD_goToRowColumn(1 , a_count);
+		LCD_intgerToString(a_Pass[a_count]);
+		EEPROM_writeByte((0x0311+a_count), a_Pass[a_count]);
+
+		_delay_ms(10);
+		EEPROM_readByte((0x0311+a_count), &a_rPass[a_count]);
+
+
+		//LCD_displayStringRowColumn(1,a_count + 3,a_strPass[a_count]);
+		_delay_ms(10);
+	}
+	UART_sendByte(End);
+	EEPROM_writeByte(0x0420, INIT_FLAG);
+	_delay_ms(10);//Wait for 10ms to write the value in the memory
+
+
+}
+
+void changePass(void)
+{
+	comparePass();
+
+	g_error_flag = UART_recieveByte();
+
+	if(g_error_flag == 0)
+	{
+		LCD_clearScreen();
+		LCD_displayStringRowColumn(0,0,"IN");
+
+		uint8 a_key = UART_recieveByte();
+		LCD_intgerToString(a_key);
+		if(a_key == 13)
+		{
+			LCD_displayStringRowColumn(0,3,"open");
+			OpenDoor();
+
+		}
+		else if (a_key == 11)
+		{
+			recievePassword();
+		}
+		LCD_displayStringRowColumn(1,0,"out");
+	}
+	else
+	{
+		CLEAR_BIT(PORTD,PD2);
+	}
+}
+
+void comparePass(void)
+{
+	uint8 a_savedPass[6];
+	uint8 a_Pass[6];
+	uint8 a_count = 0;
+	uint8 a_errCount = 0;
+
+	while(UART_recieveByte()!= compPass);
+
+	for(a_count = 0; a_count < 5; a_count++)
+	{
+		UART_sendByte(M2_comREADY);
+		a_Pass[a_count] = UART_recieveByte();
+		/*LCD_goToRowColumn(1 , a_count);
+		LCD_intgerToString(a_Pass[a_count]);*/
+	}
+	for(a_count = 0; a_count < 5; a_count++)
+	{
+		EEPROM_readByte((0x0311+a_count), &a_savedPass[a_count]);
+
+	}
+
+	for(a_count = 0; a_count < 5; a_count++)
+	{
+
+		if(a_Pass[a_count] != a_savedPass[a_count])
+		{
+			//UART_sendByte(wrong);
+			g_flag = 1;
+
+			LCD_clearScreen();
+			LCD_displayStringRowColumn(0,3,"wrong");
+			break;
+		}
+		/*else
+		{
+			//UART_sendByte(correct);
+		}*/
+	}
+	if(g_flag == 1)
+	{
+		UART_sendByte(wrong);
+		g_flag = 0;
+	}
+	else{
+		UART_sendByte(correct);
+	}
+
+	a_errCount = UART_recieveByte();
+	g_errCount = a_errCount;
+	//LCD_intgerToString(g_errCount);
+	if(a_errCount < 3 && a_errCount>0)
+	{
+		comparePass();
+	}
+	else if (a_errCount == 3)
+	{
+		g_timeCount = 0;
+		g_sec_Count = 0;
+		Timer_start();
+		SET_BIT(PORTD,PD2);
+		while (g_sec_Count != 60) //As long as it hasn't passed 1 minute,display on LCD this meassage
+		{
+
+		}
+		Timer_stop();
+	}
+
+}
+
+void OpenDoor (void)
+{
+	while(UART_recieveByte()!= Open);
+
+
+
+	g_timeCount = 0;
+	g_sec_Count = 0;
+	Timer_start();
+	PORTC &= (~(1<<PC2));
+	PORTC |= (1<<PC3);
+	while(g_sec_Count != 3)
+	{
+
+	}
+	Timer_stop();
+
+	g_timeCount = 0;
+	g_sec_Count = 0;
+	Timer_start();
+	PORTC &= (~(1<<PC3));
+	PORTC |= (1<<PC2);
+	while(g_sec_Count != 3)
+	{
+
+	}
+	Timer_stop();
+
+	//Then stop the Door
+	CLEAR_BIT(PORTC,PC2);
+	CLEAR_BIT(PORTC,PC3);
+
+}
+
+void Calc_time(void)
+{
+	g_timeCount++;
+
+	if(g_timeCount == 30)
+	{
+		g_timeCount = 0;
+		g_sec_Count ++;
+	}
+}
+
+

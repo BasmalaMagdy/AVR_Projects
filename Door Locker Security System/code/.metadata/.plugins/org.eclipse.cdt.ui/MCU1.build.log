@@ -1,0 +1,130 @@
+14:05:39 **** Build of configuration Debug for project MCU1 ****
+make all 
+Building file: ../MCU11.c
+Invoking: AVR Compiler
+avr-gcc -Wall -g2 -gstabs -O0 -fpack-struct -fshort-enums -ffunction-sections -fdata-sections -std=gnu99 -funsigned-char -funsigned-bitfields -mmcu=atmega16 -DF_CPU=1000000UL -MMD -MP -MF"MCU11.d" -MT"MCU11.o" -c -o "MCU11.o" "../MCU11.c"
+In file included from ../micro_config.h:23,
+                 from ../MCU11.c:15:
+c:/winavr-20100110/lib/gcc/../../avr/include/util/delay.h:90:3: warning: #warning "Compiler optimizations disabled; functions from <util/delay.h> won't work as designed"
+Finished building: ../MCU11.c
+ 
+Building file: ../adc.c
+Invoking: AVR Compiler
+avr-gcc -Wall -g2 -gstabs -O0 -fpack-struct -fshort-enums -ffunction-sections -fdata-sections -std=gnu99 -funsigned-char -funsigned-bitfields -mmcu=atmega16 -DF_CPU=1000000UL -MMD -MP -MF"adc.d" -MT"adc.o" -c -o "adc.o" "../adc.c"
+In file included from ../micro_config.h:23,
+                 from ../adc.h:16,
+                 from ../adc.c:13:
+c:/winavr-20100110/lib/gcc/../../avr/include/util/delay.h:90:3: warning: #warning "Compiler optimizations disabled; functions from <util/delay.h> won't work as designed"
+Finished building: ../adc.c
+ 
+Building file: ../external_eeprom.c
+Invoking: AVR Compiler
+avr-gcc -Wall -g2 -gstabs -O0 -fpack-struct -fshort-enums -ffunction-sections -fdata-sections -std=gnu99 -funsigned-char -funsigned-bitfields -mmcu=atmega16 -DF_CPU=1000000UL -MMD -MP -MF"external_eeprom.d" -MT"external_eeprom.o" -c -o "external_eeprom.o" "../external_eeprom.c"
+In file included from ../micro_config.h:23,
+                 from ../i2c.h:17,
+                 from ../external_eeprom.c:12:
+c:/winavr-20100110/lib/gcc/../../avr/include/util/delay.h:90:3: warning: #warning "Compiler optimizations disabled; functions from <util/delay.h> won't work as designed"
+Finished building: ../external_eeprom.c
+ 
+Building file: ../i2c.c
+Invoking: AVR Compiler
+avr-gcc -Wall -g2 -gstabs -O0 -fpack-struct -fshort-enums -ffunction-sections -fdata-sections -std=gnu99 -funsigned-char -funsigned-bitfields -mmcu=atmega16 -DF_CPU=1000000UL -MMD -MP -MF"i2c.d" -MT"i2c.o" -c -o "i2c.o" "../i2c.c"
+In file included from ../micro_config.h:23,
+                 from ../i2c.h:17,
+                 from ../i2c.c:13:
+c:/winavr-20100110/lib/gcc/../../avr/include/util/delay.h:90:3: warning: #warning "Compiler optimizations disabled; functions from <util/delay.h> won't work as designed"
+Finished building: ../i2c.c
+ 
+Building file: ../keypad.c
+Invoking: AVR Compiler
+avr-gcc -Wall -g2 -gstabs -O0 -fpack-struct -fshort-enums -ffunction-sections -fdata-sections -std=gnu99 -funsigned-char -funsigned-bitfields -mmcu=atmega16 -DF_CPU=1000000UL -MMD -MP -MF"keypad.d" -MT"keypad.o" -c -o "keypad.o" "../keypad.c"
+In file included from ../micro_config.h:23,
+                 from ../keypad.h:17,
+                 from ../keypad.c:13:
+c:/winavr-20100110/lib/gcc/../../avr/include/util/delay.h:90:3: warning: #warning "Compiler optimizations disabled; functions from <util/delay.h> won't work as designed"
+Finished building: ../keypad.c
+ 
+Building file: ../lcd.c
+Invoking: AVR Compiler
+avr-gcc -Wall -g2 -gstabs -O0 -fpack-struct -fshort-enums -ffunction-sections -fdata-sections -std=gnu99 -funsigned-char -funsigned-bitfields -mmcu=atmega16 -DF_CPU=1000000UL -MMD -MP -MF"lcd.d" -MT"lcd.o" -c -o "lcd.o" "../lcd.c"
+In file included from ../micro_config.h:23,
+                 from ../lcd.h:18,
+                 from ../lcd.c:13:
+c:/winavr-20100110/lib/gcc/../../avr/include/util/delay.h:90:3: warning: #warning "Compiler optimizations disabled; functions from <util/delay.h> won't work as designed"
+../lcd.c: In function 'LCD_intgerToString':
+../lcd.c:168: warning: implicit declaration of function 'itoa'
+Finished building: ../lcd.c
+ 
+Building file: ../password.c
+Invoking: AVR Compiler
+avr-gcc -Wall -g2 -gstabs -O0 -fpack-struct -fshort-enums -ffunction-sections -fdata-sections -std=gnu99 -funsigned-char -funsigned-bitfields -mmcu=atmega16 -DF_CPU=1000000UL -MMD -MP -MF"password.d" -MT"password.o" -c -o "password.o" "../password.c"
+In file included from ../micro_config.h:23,
+                 from ../password.h:11,
+                 from ../password.c:14:
+c:/winavr-20100110/lib/gcc/../../avr/include/util/delay.h:90:3: warning: #warning "Compiler optimizations disabled; functions from <util/delay.h> won't work as designed"
+../password.c: In function 'takePassword':
+../password.c:70: warning: implicit declaration of function 'itoa'
+../password.c:101: warning: pointer targets in passing argument 1 of 'strcmp' differ in signedness
+../password.c:101: warning: pointer targets in passing argument 2 of 'strcmp' differ in signedness
+../password.c: In function 'comparePass':
+../password.c:249: warning: implicit declaration of function 'Timer_start'
+../password.c:254: warning: implicit declaration of function 'Timer_stop'
+Finished building: ../password.c
+ 
+Building file: ../timer.c
+Invoking: AVR Compiler
+avr-gcc -Wall -g2 -gstabs -O0 -fpack-struct -fshort-enums -ffunction-sections -fdata-sections -std=gnu99 -funsigned-char -funsigned-bitfields -mmcu=atmega16 -DF_CPU=1000000UL -MMD -MP -MF"timer.d" -MT"timer.o" -c -o "timer.o" "../timer.c"
+In file included from ../micro_config.h:23,
+                 from ../timer.h:15,
+                 from ../timer.c:11:
+c:/winavr-20100110/lib/gcc/../../avr/include/util/delay.h:90:3: warning: #warning "Compiler optimizations disabled; functions from <util/delay.h> won't work as designed"
+../timer.c: In function 'Timer0_Ovf_setCallBack':
+../timer.c:202: warning: function return types not compatible due to 'volatile'
+../timer.c: In function 'Timer0_CTC_setCallBack':
+../timer.c:209: warning: function return types not compatible due to 'volatile'
+../timer.c: In function 'Timer1_Ovf_setCallBack':
+../timer.c:216: warning: function return types not compatible due to 'volatile'
+../timer.c: In function 'Timer1_CTC_setCallBack':
+../timer.c:223: warning: function return types not compatible due to 'volatile'
+../timer.c: In function 'Timer2_Ovf_setCallBack':
+../timer.c:230: warning: function return types not compatible due to 'volatile'
+../timer.c: In function 'Timer2_CTC_setCallBack':
+../timer.c:237: warning: function return types not compatible due to 'volatile'
+Finished building: ../timer.c
+ 
+Building file: ../uart.c
+Invoking: AVR Compiler
+avr-gcc -Wall -g2 -gstabs -O0 -fpack-struct -fshort-enums -ffunction-sections -fdata-sections -std=gnu99 -funsigned-char -funsigned-bitfields -mmcu=atmega16 -DF_CPU=1000000UL -MMD -MP -MF"uart.d" -MT"uart.o" -c -o "uart.o" "../uart.c"
+In file included from ../micro_config.h:23,
+                 from ../uart.h:16,
+                 from ../uart.c:13:
+c:/winavr-20100110/lib/gcc/../../avr/include/util/delay.h:90:3: warning: #warning "Compiler optimizations disabled; functions from <util/delay.h> won't work as designed"
+Finished building: ../uart.c
+ 
+Building target: MCU1.elf
+Invoking: AVR C Linker
+avr-gcc -Wl,-Map,MCU1.map -mmcu=atmega16 -o "MCU1.elf"  ./MCU11.o ./adc.o ./external_eeprom.o ./i2c.o ./keypad.o ./lcd.o ./password.o ./timer.o ./uart.o   
+Finished building target: MCU1.elf
+ 
+Invoking: AVR Create Extended Listing
+avr-objdump -h -S MCU1.elf  >"MCU1.lss"
+Finished building: MCU1.lss
+ 
+Invoking: Print Size
+avr-size --format=avr --mcu=atmega16 MCU1.elf
+AVR Memory Usage
+----------------
+Device: atmega16
+
+Program:   14030 bytes (85.6% Full)
+(.text + .data + .bootloader)
+
+Data:        204 bytes (19.9% Full)
+(.data + .bss + .noinit)
+
+
+Finished building: sizedummy
+ 
+
+14:05:46 Build Finished. 0 errors, 21 warnings. (took 6s.497ms)
+
