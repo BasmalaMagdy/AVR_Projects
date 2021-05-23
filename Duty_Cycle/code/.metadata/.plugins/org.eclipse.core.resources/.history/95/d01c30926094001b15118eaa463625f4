@@ -1,0 +1,140 @@
+/*
+ * duty.c
+ *
+ *  Created on: Apr 3, 2021
+ *      Author: hs
+ */
+
+
+/*
+ * measure_duty_cycle.c
+ *
+ *  Created on: Apr 3, 2021
+ *      Author: hs
+ */
+
+#include "micro_config.h"
+
+uint8 g_Interrupt_Flag = 0;
+uint8 g_edgeCount = 0;
+uint16 g_timeHigh = 0;
+uint16 g_timePeriod = 0;
+uint16 g_timePeriodPlusHigh = 0;
+
+
+ISR(INT0_vect)
+{
+	// set the interrupt flag to indicate that INT1 occurs
+	//g_Interrupt_Flag = 1;
+   // Trigger INT0 with the raising edge
+	g_edgeCount++;
+		if(g_edgeCount == 1)
+		{
+			TCNT1 = 0;
+			TOGGLE_BIT(MCUCR,ISC00);
+
+		}
+		else if(g_edgeCount == 2)
+		{
+			g_timeHigh = TCNT1;
+			TOGGLE_BIT(MCUCR,ISC00);
+
+		}
+		else if(g_edgeCount == 3)
+		{
+			g_timePeriod = TCNT1;
+			TOGGLE_BIT(MCUCR,ISC00);
+
+		}
+		else if(g_edgeCount == 4)
+		{
+
+			g_timePeriodPlusHigh = TCNT1;
+			TOGGLE_BIT(MCUCR,ISC00);
+			TCNT1 = 0;
+		}
+}
+//void INT0_Init(void)
+//{
+//
+//	                // Enable external interrupt pin INT0
+//	                // Trigger INT0 with the raising edge
+//	g_edgeCount++;
+//		if(g_edgeCount == 1)
+//		{
+//			TCNT1 = 0;
+//			TOGGLE_BIT(MCUCR,ISC00);
+//
+//		}
+//		else if(g_edgeCount == 2)
+//		{
+//			g_timeHigh = TCNT1;
+//			TOGGLE_BIT(MCUCR,ISC00);
+//
+//		}
+//		else if(g_edgeCount == 3)
+//		{
+//			g_timePeriod = TCNT1;
+//			TOGGLE_BIT(MCUCR,ISC00);
+//
+//		}
+//		else if(g_edgeCount == 4)
+//		{
+//
+//			g_timePeriodPlusHigh = TCNT1;
+//			TOGGLE_BIT(MCUCR,ISC00);
+//			TCNT1 = 0;
+//		}
+//
+//}
+
+
+int main()
+{
+
+	uint32 dutyCycle = 0;
+	//INT0_Init();
+
+
+	Timer_ConfigType Timer_Config = {TIMER1,OVERFLOW,F_CPU_CLOCK,0,0};
+
+	Timer_init(& Timer_Config);   /* initialize TIMER */
+
+	//Timer1_Ovf_setCallBack(INT0_Init);
+	LCD_init();
+
+	/* Enable Global Interrupt I-Bit */
+	Timer_start();
+	SREG |= (1<<7);
+	GICR  |= (1<<INT0);                 // Enable external interrupt pin INT0
+	MCUCR |= (1<<ISC01) | (1<<ISC00);
+	while(1)
+	{
+
+		//if(g_Interrupt_Flag = 1)
+		//{
+
+			if(g_edgeCount == 2)
+			{
+
+				g_edgeCount = 0;
+				LCD_clearScreen();
+				LCD_goToRowColumn(0,0);
+				LCD_displayString("Duty = ");
+				/* calculate the dutyCycle */
+				dutyCycle = ((float)(g_timePeriodPlusHigh-g_timePeriod) / (g_timePeriodPlusHigh - g_timeHigh)) * 100;
+				/* display the dutyCycle on LCD screen */
+				LCD_goToRowColumn(1,0);
+				LCD_intgerToString(dutyCycle);
+				LCD_displayCharacter('%');
+			}
+		//}
+	}
+
+	Timer_stop();
+}
+
+
+
+
+

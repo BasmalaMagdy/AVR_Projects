@@ -1,0 +1,200 @@
+20:38:22 **** Incremental Build of configuration Debug for project measure_duty_cycle ****
+make all 
+Building file: ../duty.c
+Invoking: AVR Compiler
+avr-gcc -Wall -g2 -gstabs -O0 -fpack-struct -fshort-enums -ffunction-sections -fdata-sections -std=gnu99 -funsigned-char -funsigned-bitfields -mmcu=atmega16 -DF_CPU=1000000UL -MMD -MP -MF"duty.d" -MT"duty.o" -c -o "duty.o" "../duty.c"
+../duty.c:8:1: warning: "F_CPU" redefined
+<command-line>: warning: this is the location of the previous definition
+In file included from ../micro_config.h:22,
+                 from ../lcd.h:18,
+                 from ../duty.c:9:
+c:/winavr-20100110/lib/gcc/../../avr/include/util/delay.h:90:3: warning: #warning "Compiler optimizations disabled; functions from <util/delay.h> won't work as designed"
+Finished building: ../duty.c
+ 
+Building target: measure_duty_cycle.elf
+Invoking: AVR C Linker
+avr-gcc -Wl,-Map,measure_duty_cycle.map -mmcu=atmega16 -o "measure_duty_cycle.elf"  ./duty.o ./lcd.o ./timer.o   
+Finished building target: measure_duty_cycle.elf
+ 
+Invoking: AVR Create Extended Listing
+avr-objdump -h -S measure_duty_cycle.elf  >"measure_duty_cycle.lss"
+Finished building: measure_duty_cycle.lss
+ 
+Invoking: Print Size
+avr-size --format=avr --mcu=atmega16 measure_duty_cycle.elf
+AVR Memory Usage
+----------------
+Device: atmega16
+
+Program:    8588 bytes (52.4% Full)
+(.text + .data + .bootloader)
+
+Data:        292 bytes (28.5% Full)
+(.data + .bss + .noinit)
+
+
+Finished building: sizedummy
+ 
+14:40:01 **** Incremental Build of configuration Debug for project measure_duty_cycle ****
+make all 
+Building file: ../duty.c
+Invoking: AVR Compiler
+avr-gcc -Wall -g2 -gstabs -O0 -fpack-struct -fshort-enums -ffunction-sections -fdata-sections -std=gnu99 -funsigned-char -funsigned-bitfields -mmcu=atmega16 -DF_CPU=1000000UL -MMD -MP -MF"duty.d" -MT"duty.o" -c -o "duty.o" "../duty.c"
+../duty.c:13:1: warning: "F_CPU" redefined
+<command-line>: warning: this is the location of the previous definition
+In file included from ../micro_config.h:22,
+                 from ../lcd.h:18,
+                 from ../duty.c:14:
+c:/winavr-20100110/lib/gcc/../../avr/include/util/delay.h:90:3: warning: #warning "Compiler optimizations disabled; functions from <util/delay.h> won't work as designed"
+../duty.c: In function 'main':
+../duty.c:86: error: called object '*49u = *49u & 251u' is not a function
+make: *** [duty.o] Error 1
+"make all" terminated with exit code 2. Build might be incomplete.
+14:42:01 **** Incremental Build of configuration Debug for project measure_duty_cycle ****
+make all 
+Building file: ../duty.c
+Invoking: AVR Compiler
+avr-gcc -Wall -g2 -gstabs -O0 -fpack-struct -fshort-enums -ffunction-sections -fdata-sections -std=gnu99 -funsigned-char -funsigned-bitfields -mmcu=atmega16 -DF_CPU=1000000UL -MMD -MP -MF"duty.d" -MT"duty.o" -c -o "duty.o" "../duty.c"
+../duty.c:13:1: warning: "F_CPU" redefined
+<command-line>: warning: this is the location of the previous definition
+In file included from ../micro_config.h:22,
+                 from ../lcd.h:18,
+                 from ../duty.c:14:
+c:/winavr-20100110/lib/gcc/../../avr/include/util/delay.h:90:3: warning: #warning "Compiler optimizations disabled; functions from <util/delay.h> won't work as designed"
+../duty.c: In function 'main':
+../duty.c:88: error: called object '*49u = *49u & 251u' is not a function
+make: *** [duty.o] Error 1
+"make all" terminated with exit code 2. Build might be incomplete.
+14:42:55 **** Incremental Build of configuration Debug for project measure_duty_cycle ****
+make all 
+Building file: ../duty.c
+Invoking: AVR Compiler
+avr-gcc -Wall -g2 -gstabs -O0 -fpack-struct -fshort-enums -ffunction-sections -fdata-sections -std=gnu99 -funsigned-char -funsigned-bitfields -mmcu=atmega16 -DF_CPU=1000000UL -MMD -MP -MF"duty.d" -MT"duty.o" -c -o "duty.o" "../duty.c"
+../duty.c:13:1: warning: "F_CPU" redefined
+<command-line>: warning: this is the location of the previous definition
+In file included from ../micro_config.h:22,
+                 from ../lcd.h:18,
+                 from ../duty.c:14:
+c:/winavr-20100110/lib/gcc/../../avr/include/util/delay.h:90:3: warning: #warning "Compiler optimizations disabled; functions from <util/delay.h> won't work as designed"
+Finished building: ../duty.c
+ 
+Building file: ../lcd.c
+Invoking: AVR Compiler
+avr-gcc -Wall -g2 -gstabs -O0 -fpack-struct -fshort-enums -ffunction-sections -fdata-sections -std=gnu99 -funsigned-char -funsigned-bitfields -mmcu=atmega16 -DF_CPU=1000000UL -MMD -MP -MF"lcd.d" -MT"lcd.o" -c -o "lcd.o" "../lcd.c"
+In file included from ../micro_config.h:22,
+                 from ../lcd.h:18,
+                 from ../lcd.c:13:
+c:/winavr-20100110/lib/gcc/../../avr/include/util/delay.h:90:3: warning: #warning "Compiler optimizations disabled; functions from <util/delay.h> won't work as designed"
+../lcd.c: In function 'LCD_intgerToString':
+../lcd.c:107: warning: implicit declaration of function 'itoa'
+Finished building: ../lcd.c
+ 
+Building file: ../timer.c
+Invoking: AVR Compiler
+avr-gcc -Wall -g2 -gstabs -O0 -fpack-struct -fshort-enums -ffunction-sections -fdata-sections -std=gnu99 -funsigned-char -funsigned-bitfields -mmcu=atmega16 -DF_CPU=1000000UL -MMD -MP -MF"timer.d" -MT"timer.o" -c -o "timer.o" "../timer.c"
+In file included from ../micro_config.h:22,
+                 from ../timer.h:11,
+                 from ../timer.c:8:
+c:/winavr-20100110/lib/gcc/../../avr/include/util/delay.h:90:3: warning: #warning "Compiler optimizations disabled; functions from <util/delay.h> won't work as designed"
+../timer.c: In function 'Timer0_Ovf_setCallBack':
+../timer.c:200: warning: function return types not compatible due to 'volatile'
+../timer.c: In function 'Timer0_CTC_setCallBack':
+../timer.c:207: warning: function return types not compatible due to 'volatile'
+../timer.c: In function 'Timer1_Ovf_setCallBack':
+../timer.c:214: warning: function return types not compatible due to 'volatile'
+../timer.c: In function 'Timer1_CTC_setCallBack':
+../timer.c:221: warning: function return types not compatible due to 'volatile'
+../timer.c: In function 'Timer2_Ovf_setCallBack':
+../timer.c:228: warning: function return types not compatible due to 'volatile'
+../timer.c: In function 'Timer2_CTC_setCallBack':
+../timer.c:235: warning: function return types not compatible due to 'volatile'
+Finished building: ../timer.c
+ 
+Building target: measure_duty_cycle.elf
+Invoking: AVR C Linker
+avr-gcc -Wl,-Map,measure_duty_cycle.map -mmcu=atmega16 -o "measure_duty_cycle.elf"  ./duty.o ./lcd.o ./timer.o   
+Finished building target: measure_duty_cycle.elf
+ 
+Invoking: AVR Create Extended Listing
+avr-objdump -h -S measure_duty_cycle.elf  >"measure_duty_cycle.lss"
+Finished building: measure_duty_cycle.lss
+ 
+Invoking: Print Size
+avr-size --format=avr --mcu=atmega16 measure_duty_cycle.elf
+AVR Memory Usage
+----------------
+Device: atmega16
+
+Program:    8544 bytes (52.1% Full)
+(.text + .data + .bootloader)
+
+Data:        292 bytes (28.5% Full)
+(.data + .bss + .noinit)
+
+
+Finished building: sizedummy
+ 
+14:45:06 **** Incremental Build of configuration Debug for project measure_duty_cycle ****
+make all 
+Building file: ../duty.c
+Invoking: AVR Compiler
+avr-gcc -Wall -g2 -gstabs -O0 -fpack-struct -fshort-enums -ffunction-sections -fdata-sections -std=gnu99 -funsigned-char -funsigned-bitfields -mmcu=atmega16 -DF_CPU=1000000UL -MMD -MP -MF"duty.d" -MT"duty.o" -c -o "duty.o" "../duty.c"
+../duty.c:13:1: warning: "F_CPU" redefined
+<command-line>: warning: this is the location of the previous definition
+In file included from ../micro_config.h:22,
+                 from ../lcd.h:18,
+                 from ../duty.c:14:
+c:/winavr-20100110/lib/gcc/../../avr/include/util/delay.h:90:3: warning: #warning "Compiler optimizations disabled; functions from <util/delay.h> won't work as designed"
+In file included from ../lcd.h:18,
+                 from ../duty.c:14:
+../micro_config.h:24:19: error: timer.h: No such file or directory
+make: *** [duty.o] Error 1
+"make all" terminated with exit code 2. Build might be incomplete.
+14:45:15 **** Incremental Build of configuration Debug for project measure_duty_cycle ****
+make all 
+Building file: ../duty.c
+Invoking: AVR Compiler
+avr-gcc -Wall -g2 -gstabs -O0 -fpack-struct -fshort-enums -ffunction-sections -fdata-sections -std=gnu99 -funsigned-char -funsigned-bitfields -mmcu=atmega16 -DF_CPU=1000000UL -MMD -MP -MF"duty.d" -MT"duty.o" -c -o "duty.o" "../duty.c"
+../duty.c:13:1: warning: "F_CPU" redefined
+<command-line>: warning: this is the location of the previous definition
+In file included from ../micro_config.h:22,
+                 from ../lcd.h:18,
+                 from ../duty.c:14:
+c:/winavr-20100110/lib/gcc/../../avr/include/util/delay.h:90:3: warning: #warning "Compiler optimizations disabled; functions from <util/delay.h> won't work as designed"
+Finished building: ../duty.c
+ 
+Building file: ../lcd.c
+Invoking: AVR Compiler
+avr-gcc -Wall -g2 -gstabs -O0 -fpack-struct -fshort-enums -ffunction-sections -fdata-sections -std=gnu99 -funsigned-char -funsigned-bitfields -mmcu=atmega16 -DF_CPU=1000000UL -MMD -MP -MF"lcd.d" -MT"lcd.o" -c -o "lcd.o" "../lcd.c"
+In file included from ../micro_config.h:22,
+                 from ../lcd.h:18,
+                 from ../lcd.c:13:
+c:/winavr-20100110/lib/gcc/../../avr/include/util/delay.h:90:3: warning: #warning "Compiler optimizations disabled; functions from <util/delay.h> won't work as designed"
+../lcd.c: In function 'LCD_intgerToString':
+../lcd.c:107: warning: implicit declaration of function 'itoa'
+Finished building: ../lcd.c
+ 
+Building target: measure_duty_cycle.elf
+Invoking: AVR C Linker
+avr-gcc -Wl,-Map,measure_duty_cycle.map -mmcu=atmega16 -o "measure_duty_cycle.elf"  ./duty.o ./lcd.o   
+Finished building target: measure_duty_cycle.elf
+ 
+Invoking: AVR Create Extended Listing
+avr-objdump -h -S measure_duty_cycle.elf  >"measure_duty_cycle.lss"
+Finished building: measure_duty_cycle.lss
+ 
+Invoking: Print Size
+avr-size --format=avr --mcu=atmega16 measure_duty_cycle.elf
+AVR Memory Usage
+----------------
+Device: atmega16
+
+Program:    7148 bytes (43.6% Full)
+(.text + .data + .bootloader)
+
+Data:        279 bytes (27.2% Full)
+(.data + .bss + .noinit)
+
+
+Finished building: sizedummy
+ 
