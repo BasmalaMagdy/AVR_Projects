@@ -1,0 +1,199 @@
+/*
+ * 7seg.c
+ *
+ *  Created on: Feb 3, 2021
+ *      Author: Basmala Magdy
+ */
+
+#include <avr/io.h>
+#include <avr/interrupt.h>
+#include <util/delay.h>
+ //  Variables
+	unsigned char sec_num1 = 0;
+	unsigned char sec_num2 = 0;
+	unsigned char min_num1 = 0;
+	unsigned char min_num2 = 0;
+	unsigned char hr_num1 = 0;
+	unsigned char hr_num2 = 0;
+	unsigned char isr;
+	unsigned char stop = 1;
+
+// ------------------------------------------------
+void INT0_RESET(void)
+{
+	PORTD |= (1 << PD2);   // activate input pull up
+	MCUCR |= (1 << ISC01);   // falling edge
+	GICR |= (1 << 6);          // GENERATE INT0
+
+}
+ISR(INT0_vect)
+{
+	sec_num1 = 0;
+	sec_num2 = 0;
+	min_num1 = 0;
+	min_num2 = 0;
+	hr_num1 = 0;
+	hr_num2 = 0;
+}
+// -------------------------------------------------
+void INT1_PAUSE(void)
+{
+	MCUCR |= (1 << ISC01) | (1 << ISC11);   // Raising edge
+	GICR |= (1 << 7);          // GENERATE INT1
+}
+ISR(INT1_vect)
+{
+	if(stop == 1)
+	{
+		TCCR1B &= ~ (1<<WGM12) & (1<<CS12) & (1<<CS10);
+		stop = 0;
+	}
+	else
+	{
+		TCCR1B = (1<<WGM12) | (1<<CS12) | (1<<CS10);
+	}
+
+}
+
+// -------------------------------------------------
+void Timer1_init(unsigned char tick)
+{
+	TCNT1 = 0;
+	OCR1A = tick;
+	//Enable Timer1 Compare A
+	TIMSK |= (1<<OCIE1A);
+	TCCR1A = (1<<FOC1A) ;                                     // non-PWM
+	TCCR1B = (1<<WGM12) | (1<<CS12) | (1<<CS10);
+}
+ISR(TIMER1_COMPA_vect)
+{
+  // isr = 1;
+	sec_num1++;
+	// count seconds
+	if(sec_num1 == 10)
+	{
+		sec_num1 = 0;                                       // check overflow
+		sec_num2++;
+	}
+	if(sec_num2 == 6)
+	{
+		sec_num2 = 0;
+		min_num1++;
+	}
+	// count minutes
+	if(min_num1 == 10)
+	{
+		min_num1 = 0;
+		min_num2++;
+	}
+	if(min_num2 == 6)
+	{
+		min_num2 = 0;
+		hr_num1++;
+	}
+	// count hours
+	if(hr_num1 == 10)
+	{
+		hr_num1 = 0;
+		hr_num2++;
+	}
+	if(hr_num2 == 6)
+	{
+		hr_num2 = 0;
+	}
+}
+
+//------------------------------------------------------------
+
+int main()
+{
+
+	DDRB &= (1 << PB2);                                                 // configure PB2 as input pin
+	DDRD &= (1 << PD2);                                                // configure PD2 as input pin
+	DDRD &= (1 << PD3);                                               // configure PD3 as input pin
+	DDRC |= (1<<PC0) | (1<<PC1) | (1<<PC2) | (1<<PC3);               // configure PC0,1,2,3 as output pins
+
+	PORTC &= 0x00;              // Initialize the 7-segment to ZERO
+
+	// ENABLE
+	DDRA |= 0x3F;     // configure PA0,1,2,3,4,5 as output pin
+	PORTA |= 0x3F;   // PA0,1,2,3,4,5 = 1 (NPN transistor Enable = 1)
+
+	SREG |=(1<<7) ;
+
+	INT0_RESET();
+	Timer1_init(976);
+
+	while(1)
+	{
+		/*if(isr == 1)
+		{
+			sec_num1++;
+			// count seconds
+			if(sec_num1 == 10)
+			{
+				sec_num1 = 0;                                       // check overflow
+				sec_num2++;
+			}
+			if(sec_num2 == 6)
+			{
+				sec_num2 = 0;
+				min_num1++;
+			}
+			// count minutes
+			if(min_num1 == 10)
+			{
+				min_num1 = 0;
+				min_num2++;
+			}
+			if(min_num2 == 6)
+			{
+				min_num2 = 0;
+				hr_num1++;
+			}
+			// count hours
+			if(hr_num1 == 10)
+			{
+				hr_num1 = 0;
+				hr_num2++;
+			}
+			if(hr_num2 == 6)
+			{
+				hr_num2 = 0;
+			}
+			isr = 0;
+		}*/
+	//else{
+		//_delay_ms(2);
+		// display seconds
+		PORTA = (1<<PA0);
+		PORTC = (PORTC & 0xF0) | (sec_num1 & 0x0F);
+		_delay_ms(2);
+		PORTA = (1<<PA1);
+		PORTC = (PORTC & 0xF0) | (sec_num2 & 0x0F);
+		_delay_ms(2);
+		// display minutes
+		PORTA = (1<<PA2);
+		PORTC = (PORTC & 0xF0) | (min_num1 & 0x0F);
+		_delay_ms(2);
+		PORTA = (1<<PA3);
+		PORTC = (PORTC & 0xF0) | (min_num2 & 0x0F);
+		_delay_ms(2);
+		// display hours
+		PORTA = (1<<PA4);
+		PORTC = (PORTC & 0xF0) | (hr_num1 & 0x0F);
+		_delay_ms(2);
+		PORTA = (1<<PA5);
+		PORTC = (PORTC & 0xF0) | (hr_num2 & 0x0F);
+		_delay_ms(2);
+	//}
+
+
+
+
+	}
+
+
+}
+
+

@@ -1,0 +1,60 @@
+17:25:49 **** Incremental Build of configuration Debug for project Project ****
+make all 
+Building file: ../7seg.c
+Invoking: AVR Compiler
+avr-gcc -Wall -g2 -gstabs -O0 -fpack-struct -fshort-enums -ffunction-sections -fdata-sections -std=gnu99 -funsigned-char -funsigned-bitfields -mmcu=atmega16 -DF_CPU=1000000UL -MMD -MP -MF"7seg.d" -MT"7seg.o" -c -o "7seg.o" "../7seg.c"
+AllocationBase 0xAA0000, BaseAddress 0xBC0000, RegionSize 0x61000, State 0x1000
+C:\WinAVR-20100110\utils\bin\sh.exe: *** Couldn't reserve space for cygwin's heap, Win32 error 0
+make: *** [7seg.o] Error 1
+"make all" terminated with exit code 2. Build might be incomplete.
+17:28:27 **** Incremental Build of configuration Debug for project Project ****
+make all 
+Building file: ../7segProj.c
+Invoking: AVR Compiler
+avr-gcc -Wall -g2 -gstabs -O0 -fpack-struct -fshort-enums -ffunction-sections -fdata-sections -std=gnu99 -funsigned-char -funsigned-bitfields -mmcu=atmega16 -DF_CPU=1000000UL -MMD -MP -MF"7segProj.d" -MT"7segProj.o" -c -o "7segProj.o" "../7segProj.c"
+AllocationBase 0xD50000, BaseAddress 0xE00000, RegionSize 0x6D000, State 0x1000
+C:\WinAVR-20100110\utils\bin\sh.exe: *** Couldn't reserve space for cygwin's heap, Win32 error 0
+make: *** [7segProj.o] Error 1
+"make all" terminated with exit code 2. Build might be incomplete.
+17:29:05 **** Incremental Build of configuration Debug for project Project ****
+make all 
+Building file: ../7segProj.c
+Invoking: AVR Compiler
+avr-gcc -Wall -g2 -gstabs -O0 -fpack-struct -fshort-enums -ffunction-sections -fdata-sections -std=gnu99 -funsigned-char -funsigned-bitfields -mmcu=atmega16 -DF_CPU=1000000UL -MMD -MP -MF"7segProj.d" -MT"7segProj.o" -c -o "7segProj.o" "../7segProj.c"
+AllocationBase 0xA70000, BaseAddress 0xBC0000, RegionSize 0xB0000, State 0x2000
+C:\WinAVR-20100110\utils\bin\sh.exe: *** Couldn't reserve space for cygwin's heap, Win32 error 0
+make: *** [7segProj.o] Error 1
+"make all" terminated with exit code 2. Build might be incomplete.
+17:42:29 **** Incremental Build of configuration Debug for project Project ****
+make all 
+Building file: ../7segProj.c
+Invoking: AVR Compiler
+avr-gcc -Wall -g2 -gstabs -O0 -fpack-struct -fshort-enums -ffunction-sections -fdata-sections -std=gnu99 -funsigned-char -funsigned-bitfields -mmcu=atmega16 -DF_CPU=1000000UL -MMD -MP -MF"7segProj.d" -MT"7segProj.o" -c -o "7segProj.o" "../7segProj.c"
+In file included from ../7segProj.c:10:
+c:/winavr-20100110/lib/gcc/../../avr/include/util/delay.h:90:3: warning: #warning "Compiler optimizations disabled; functions from <util/delay.h> won't work as designed"
+Finished building: ../7segProj.c
+ 
+Building target: Project.elf
+Invoking: AVR C Linker
+avr-gcc -Wl,-Map,Project.map -mmcu=atmega16 -o "Project.elf"  ./7segProj.o   
+Finished building target: Project.elf
+ 
+Invoking: AVR Create Extended Listing
+avr-objdump -h -S Project.elf  >"Project.lss"
+Finished building: Project.lss
+ 
+Invoking: Print Size
+avr-size --format=avr --mcu=atmega16 Project.elf
+AVR Memory Usage
+----------------
+Device: atmega16
+
+Program:    5500 bytes (33.6% Full)
+(.text + .data + .bootloader)
+
+Data:         14 bytes (1.4% Full)
+(.data + .bss + .noinit)
+
+
+Finished building: sizedummy
+ 
