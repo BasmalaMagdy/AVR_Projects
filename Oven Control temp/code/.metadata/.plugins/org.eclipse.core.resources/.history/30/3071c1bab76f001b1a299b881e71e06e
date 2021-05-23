@@ -1,0 +1,54 @@
+/*
+ * poten.c
+ *
+ *  Created on: Feb 15, 2021
+ *      Author: hs
+ */
+
+
+#include "adc.h"
+#include "lcd.h"
+#include "motor.h"
+
+void PWM_Timer0_Init(unsigned char set_duty_cycle)
+{
+
+	TCNT0 = 0; //Set Timer Initial value
+	OCR0  = set_duty_cycle; // Set Compare Value
+	MOTOR_OUT_PORT_DIR |= (1<<EN1);
+	TCCR0 = (1<<WGM00) | (1<<WGM01) | (1<<COM01) | (1<<CS01);
+
+}
+
+
+int main(void)
+{
+	PWM_Timer0_Init(600);
+	uint32 value;
+	uint32 motor_value;
+
+	SREG |= (1<<7);/* Enable Global Interrupts */
+
+	LCD_init();
+	ADC_init();
+	LCD_clearScreen();
+	LCD_displayString("ADC Value = ");
+
+
+
+
+	MOTOR_OUT_PORT_DIR = 0x03;
+	MOTOR_OUT_PORT = 0xFC;
+
+
+	while(1)
+	{
+		LCD_goToRowColumn(0,11);
+	    ADC_readChannel(0);
+		value = ((uint32)g_adcResult);
+		LCD_intgerToString(value);
+
+
+		motor_value = ((255*((uint32)g_adcResult))/1023);
+	}
+}

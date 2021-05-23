@@ -1,0 +1,43 @@
+ /******************************************************************************
+ *
+ * Module: motor
+ *
+ * File Name: motor.h
+ *
+ * Description: Header file for the motor driver
+ *
+ * Author: Basmala Magdy
+ *
+ *******************************************************************************/
+
+#ifndef MOTOR_H_
+#define MOTOR_H_
+
+#include "std_types.h"
+#include "common_macros.h"
+#include "micro_config.h"
+
+
+/*******************************************************************************
+ *                      Preprocessor Macros                                    *
+ *******************************************************************************/
+/* Motor HW Pins */
+#define IN1 PB0
+#define IN2 PB1
+#define EN1 PB3
+#define INT PD3
+
+#define MOTOR_OUT_PORT PORTB
+#define MOTOR_OUT_PORT_DIR DDRB
+#define MOTOR_IN_PORT PORTD
+#define MOTOR_IN_PORT_DIR DDRD
+
+/* LCD Commands */
+#define Timer0_Initial_value TCNT0
+#define Compare Value OCR0
+
+
+
+
+
+#endif /* MOTOR_H_ */

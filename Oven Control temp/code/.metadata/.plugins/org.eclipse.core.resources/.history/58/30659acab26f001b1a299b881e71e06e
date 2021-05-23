@@ -1,0 +1,21 @@
+/*
+ * motor.c
+ *
+ *  Created on: Feb 15, 2021
+ *      Author: hs
+ */
+
+/*#include "motor.h"
+
+
+
+int main(void)
+{
+	MOTOR_OUT_PORT_DIR = 0x0F;
+	MOTOR_OUT_PORT = 0xF0;
+
+	while(1)
+	{
+
+	}
+}*/

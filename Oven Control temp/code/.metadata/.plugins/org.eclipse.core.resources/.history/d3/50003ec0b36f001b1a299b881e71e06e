@@ -1,0 +1,25 @@
+/*
+ * motor.c
+ *
+ *  Created on: Feb 15, 2021
+ *      Author: hs
+ */
+
+#include "motor.h"
+
+
+
+int main(void)
+{
+	uint16 motor_value;
+	SREG |= (1<<7);/* Enable Global Interrupts */
+
+	MOTOR_OUT_PORT_DIR = 0x0F;
+	MOTOR_OUT_PORT = 0xF0;
+
+	while(1)
+	{
+	    ADC_readChannel(0);
+		motor_value = ((255*((uint32)g_adcResult))/1023);
+	}
+}

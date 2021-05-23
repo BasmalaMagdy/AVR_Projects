@@ -1,0 +1,64 @@
+22:47:40 **** Incremental Build of configuration Debug for project Project2 ****
+make all 
+Building file: ../adc.c
+Invoking: AVR Compiler
+avr-gcc -Wall -g2 -gstabs -O0 -fpack-struct -fshort-enums -ffunction-sections -fdata-sections -std=gnu99 -funsigned-char -funsigned-bitfields -mmcu=atmega16 -DF_CPU=1000000UL -MMD -MP -MF"adc.d" -MT"adc.o" -c -o "adc.o" "../adc.c"
+In file included from ../micro_config.h:22,
+                 from ../adc.h:16,
+                 from ../adc.c:13:
+c:/winavr-20100110/lib/gcc/../../avr/include/util/delay.h:90:3: warning: #warning "Compiler optimizations disabled; functions from <util/delay.h> won't work as designed"
+Finished building: ../adc.c
+ 
+Building file: ../lcd.c
+Invoking: AVR Compiler
+avr-gcc -Wall -g2 -gstabs -O0 -fpack-struct -fshort-enums -ffunction-sections -fdata-sections -std=gnu99 -funsigned-char -funsigned-bitfields -mmcu=atmega16 -DF_CPU=1000000UL -MMD -MP -MF"lcd.d" -MT"lcd.o" -c -o "lcd.o" "../lcd.c"
+In file included from ../micro_config.h:22,
+                 from ../lcd.h:18,
+                 from ../lcd.c:13:
+c:/winavr-20100110/lib/gcc/../../avr/include/util/delay.h:90:3: warning: #warning "Compiler optimizations disabled; functions from <util/delay.h> won't work as designed"
+../lcd.c: In function 'LCD_intgerToString':
+../lcd.c:100: warning: implicit declaration of function 'itoa'
+Finished building: ../lcd.c
+ 
+Building file: ../motor.c
+Invoking: AVR Compiler
+avr-gcc -Wall -g2 -gstabs -O0 -fpack-struct -fshort-enums -ffunction-sections -fdata-sections -std=gnu99 -funsigned-char -funsigned-bitfields -mmcu=atmega16 -DF_CPU=1000000UL -MMD -MP -MF"motor.d" -MT"motor.o" -c -o "motor.o" "../motor.c"
+In file included from ../micro_config.h:22,
+                 from ../adc.h:16,
+                 from ../motor.c:12:
+c:/winavr-20100110/lib/gcc/../../avr/include/util/delay.h:90:3: warning: #warning "Compiler optimizations disabled; functions from <util/delay.h> won't work as designed"
+Finished building: ../motor.c
+ 
+Building file: ../poten.c
+Invoking: AVR Compiler
+avr-gcc -Wall -g2 -gstabs -O0 -fpack-struct -fshort-enums -ffunction-sections -fdata-sections -std=gnu99 -funsigned-char -funsigned-bitfields -mmcu=atmega16 -DF_CPU=1000000UL -MMD -MP -MF"poten.d" -MT"poten.o" -c -o "poten.o" "../poten.c"
+In file included from ../micro_config.h:22,
+                 from ../adc.h:16,
+                 from ../poten.c:12:
+c:/winavr-20100110/lib/gcc/../../avr/include/util/delay.h:90:3: warning: #warning "Compiler optimizations disabled; functions from <util/delay.h> won't work as designed"
+Finished building: ../poten.c
+ 
+Building target: Project2.elf
+Invoking: AVR C Linker
+avr-gcc -Wl,-Map,Project2.map -mmcu=atmega16 -o "Project2.elf"  ./adc.o ./lcd.o ./motor.o ./poten.o   
+Finished building target: Project2.elf
+ 
+Invoking: AVR Create Extended Listing
+avr-objdump -h -S Project2.elf  >"Project2.lss"
+Finished building: Project2.lss
+ 
+Invoking: Print Size
+avr-size --format=avr --mcu=atmega16 Project2.elf
+AVR Memory Usage
+----------------
+Device: atmega16
+
+Program:    6130 bytes (37.4% Full)
+(.text + .data + .bootloader)
+
+Data:         24 bytes (2.3% Full)
+(.data + .bss + .noinit)
+
+
+Finished building: sizedummy
+ 

@@ -1,0 +1,32 @@
+/*
+ * poten.c
+ *
+ *  Created on: Feb 15, 2021
+ *      Author: hs
+ */
+
+
+#include "adc.h"
+#include "lcd.h"
+#include "motor.h"
+
+int main(void)
+{
+	uint32 value;
+
+	SREG |= (1<<7);/* Enable Global Interrupts */
+
+	LCD_init();
+	ADC_init();
+	LCD_clearScreen();
+	LCD_displayString("ADC Value = ");
+
+	while(1)
+	{
+		LCD_goToRowColumn(0,11);
+	    ADC_readChannel(0);
+		value = ((uint32)g_adcResult);
+		LCD_intgerToString(value);
+
+	}
+}
